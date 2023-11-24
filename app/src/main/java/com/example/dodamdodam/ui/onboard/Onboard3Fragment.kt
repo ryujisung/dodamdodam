@@ -1,4 +1,4 @@
-package com.example.dodamdodam.onboard
+package com.example.dodamdodam.ui.onboard
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.dodamdodam.onboard
+package com.example.dodamdodam.ui.onboard
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

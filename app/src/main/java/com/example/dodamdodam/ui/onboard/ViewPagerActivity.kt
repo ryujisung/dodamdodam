@@ -1,11 +1,11 @@
-package com.example.dodamdodam.onboard
+package com.example.dodamdodam.ui.onboard
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.dodamdodam.LoginActivity
+import com.example.dodamdodam.ui.login.LoginActivity
 import com.example.dodamdodam.R
-import com.example.dodamdodam.signup.SignUpActivity
+import com.example.dodamdodam.ui.signup.SignUpActivity
 import com.example.dodamdodam.databinding.ActivityViewPagerBinding
 
 class ViewPagerActivity : AppCompatActivity() {
@@ -37,7 +37,7 @@ class ViewPagerActivity : AppCompatActivity() {
     }
     private fun initAdapter() {
         //Adapter 안에 ViewPager2 상에 띄워줄 fragmentList 생성
-        val fragmentList = listOf(Onboard1Fragment(),Onboard2Fragment(),Onboard3Fragment())
+        val fragmentList = listOf(Onboard1Fragment(), Onboard2Fragment(), Onboard3Fragment())
 
         //ViewPagerAdapter 초기화
         ViewPagerAdapter = PagerAdapter(this)

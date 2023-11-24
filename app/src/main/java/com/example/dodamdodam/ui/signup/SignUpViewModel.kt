@@ -1,9 +1,9 @@
-package com.example.dodamdodam.signup
+package com.example.dodamdodam.ui.signup
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dodamdodam.utils.State
+import com.example.dodamdodam.ui.utils.State
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.regex.Pattern
