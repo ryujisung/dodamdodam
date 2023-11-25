@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.example.dodamdodam.ui.utils.State
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Calendar
+import java.util.Locale
 import java.util.regex.Pattern
 
 class SignUpViewModel: ViewModel() {
@@ -31,11 +35,16 @@ class SignUpViewModel: ViewModel() {
                     k = true
                     val user = FirebaseAuth.getInstance().currentUser
                     val uid = user?.uid
+                    val calendar = Calendar.getInstance()
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val currentDate = dateFormat.format(calendar.time)
+
                     val data2 = hashMapOf(
                         "id" to uid.toString(),
                         "email" to email.value.toString(),
                         "name" to nickname.value.toString(),
                         "family" to "none",
+                        "createdate" to  currentDate.toString(),
                     )
                     db.collection(email.value.toString())
                         .document("userinfo")
