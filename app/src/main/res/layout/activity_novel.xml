@@ -6,21 +6,27 @@
             type="com.example.dodamdodam.model.Novel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <!-- Title TextView -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_arrow_back"/>
+
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{novel.title}"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:textSize="24sp" />
+            android:fontFamily="@font/pretendard_semibold"
+            android:layout_marginTop="30dp"
+            android:textSize="22sp" />
 
-        <!-- Author TextView -->
         <TextView
             android:id="@+id/tvAuthor"
             android:layout_width="wrap_content"
@@ -28,21 +34,24 @@
             android:text="@{novel.author}"
             android:layout_below="@id/tvTitle"
             android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"
-            android:textSize="18sp" />
+            android:textSize="14sp"
+            android:textColor="@color/text3" />
 
-        <!-- Introduce TextView -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"
+            android:text="소개"/>
+
         <TextView
             android:id="@+id/tvIntroduce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{novel.introduce}"
             android:layout_below="@id/tvAuthor"
-            android:layout_marginTop="12dp"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp" />
+            android:layout_marginTop="8dp" />
 
-        <!-- Other UI elements -->
-
-    </RelativeLayout>
+    </LinearLayout>
 </layout>
