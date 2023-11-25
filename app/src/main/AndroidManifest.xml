@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Dodamdodam"
         tools:targetApi="31">
         <activity
+            android:name=".ui.more.edit.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.more.noti.NotiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.more.connetct.ConnectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.more.pw.PwActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.article.PoemActivity"
             android:exported="false" />
         <activity

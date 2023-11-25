@@ -58,21 +58,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/my_txt_fammilys"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <TextView
-                    android:id="@+id/my_txt_text1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="설정"
-                    android:textSize="13sp"
-                    android:textColor="@color/text3" />
-
-                <TextView
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/my_txt_noti"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="알림" />
 
                 <View
                     app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +95,7 @@
                     android:id="@+id/my_txt_connect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="가족 관리"
+                    android:text="가족 코드 연결"
                     android:layout_marginTop="20dp" />
 
                 <TextView
