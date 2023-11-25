@@ -35,8 +35,7 @@ class SignUpViewModel: ViewModel() {
                         "id" to uid.toString(),
                         "email" to email.value.toString(),
                         "name" to nickname.value.toString(),
-                        "profileImageUrl" to "https://i.namu.wiki/i/Bge3xnYd4kRe_IKbm2uqxlhQJij2SngwNssjpjaOyOqoRhQlNwLrR2ZiK-JWJ2b99RGcSxDaZ2UCI7fiv4IDDQ.webp",
-                        "state" to "없음"
+                        "family" to "none",
                     )
                     db.collection(email.value.toString())
                         .document("userinfo")
@@ -47,6 +46,22 @@ class SignUpViewModel: ViewModel() {
                         .addOnFailureListener { exception ->
                             Log.e("dd",exception.toString())
                         }
+                    val data3 = hashMapOf(
+                        "email" to email.value.toString(),
+                        "name" to nickname.value.toString(),
+                    )
+                    db.collection("family")
+                        .document("family")
+                        .collection(email.value.toString().dropLast(10))
+                        .document(email.value.toString().dropLast(10))
+                        .set(data3)
+                        .addOnSuccessListener {
+                            Log.e("dd","success")
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.e("dd",exception.toString())
+                        }
+
 
 
                 }else if(task.exception?.message.isNullOrEmpty()){

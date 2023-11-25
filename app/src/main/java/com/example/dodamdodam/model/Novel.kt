@@ -4,4 +4,5 @@ data class Novel(
     var author: String = "",
     var image: String = "",
     var title: String = "",
+    var introduce: String = "",
 )
