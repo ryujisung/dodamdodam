@@ -51,10 +51,10 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:text="비밀번호를 입력해주세요"
                 android:textColor="@color/text1"
+                android:fontFamily="@font/pretendard_semibold"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="@id/line_signUp2_start"
                 app:layout_constraintTop_toTopOf="@id/guideline1"/>
@@ -98,6 +98,7 @@
 
 
             <Button
+                style="@style/ButtonStyle"
                 android:id="@+id/next"
                 android:layout_width="0dp"
                 android:textStyle="bold"

@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="이메일을 입력해 주세요"
                 android:textSize="22sp"
+                android:fontFamily="@font/pretendard_semibold"
                 app:layout_constraintTop_toTopOf="@id/guideline1"
                 app:layout_constraintStart_toStartOf="@id/line_signUp1_start"
                 app:layout_constraintTop_toBottomOf="@id/hd_signUp1" />
@@ -91,6 +92,7 @@
                 app:layout_constraintStart_toStartOf="@id/line_signUp1_start"/>
 
             <Button
+                style="@style/ButtonStyle"
                 android:id="@+id/next"
                 android:layout_width="0dp"
                 android:layout_height="54dp"

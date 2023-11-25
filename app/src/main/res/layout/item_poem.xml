@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingBottom="30dp">
+
     <TextView
         android:id="@+id/textView_poem_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textSize="18sp"
-        android:layout_marginStart="22dp"
-        android:text="시이름" />
+        android:textSize="16sp"
+        android:text="시이름"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
     <TextView
         android:id="@+id/textView_poem_author"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginStart="13dp"
-        android:textSize="18sp"
-        android:text="글쓴이 " />
+        android:layout_marginStart="14dp"
+        android:textColor="@color/text3"
+        android:textSize="14sp"
+        android:text="글쓴이"
+        android:layout_gravity="bottom"
+        app:layout_constraintStart_toEndOf="@id/textView_poem_title"
+        app:layout_constraintBottom_toBottomOf="@id/textView_poem_title"/>
 
     <!-- 여기에 추가적인 뷰들을 배치할 수 있습니다. -->
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
