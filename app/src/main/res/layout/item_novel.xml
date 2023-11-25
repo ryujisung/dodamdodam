@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingEnd="4dp">
 
     <ImageView
         app:layout_constraintStart_toStartOf="parent"
@@ -20,21 +20,22 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="10dp"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/imageView_novel_image"
         android:text="Friend Name" />
 
     <TextView
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/imageView_novel_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_novel_name"
         android:id="@+id/textView_novel_quthor"
+        android:layout_marginTop="2dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="10dp"
-        android:textSize="18sp"
+        android:textSize="14sp"
+        android:textColor="@color/text3"
         android:text="Friend State" />
 
     <!-- 여기에 추가적인 뷰들을 배치할 수 있습니다. -->

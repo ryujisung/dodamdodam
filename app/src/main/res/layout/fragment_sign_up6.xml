@@ -74,6 +74,7 @@
                 />
 
             <Button
+                style="@style/ButtonStyle"
                 android:id="@+id/next"
                 android:layout_width="0dp"
                 android:textStyle="bold"

@@ -39,8 +39,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                             finish()
                         } else {
                             // 로그인 실패 시, 에러 메시지를 표시합니다.
-                            binding.txtSign1Eror.visibility = android.view.View.VISIBLE
                             binding.txtSign1Eror.text = "아이디 또는 비밀번호가 틀렸습니다."
+                            binding.txtSign1Eror.visibility = android.view.View.VISIBLE
                             binding.loginEdtEmail.setBackgroundResource(R.drawable.edt_error)
                             binding.loginEdtPassword.setBackgroundResource(R.drawable.edt_error)
                         }
