@@ -1,4 +1,4 @@
-package com.example.lets_meet.ui.base
+package com.example.dodamdodam.ui.base
 
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager

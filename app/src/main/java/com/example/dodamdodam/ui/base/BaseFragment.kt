@@ -1,4 +1,4 @@
-package com.example.lets_meet.ui.base
+package com.example.dodamdodam.ui.base
 
 import android.content.Context
 import android.os.Bundle

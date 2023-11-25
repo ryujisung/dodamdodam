@@ -4,7 +4,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 import com.example.dodamdodam.R
-import com.example.lets_meet.ui.base.BaseFragment
+import com.example.dodamdodam.ui.base.BaseFragment
 
 abstract class SignUpFragment<D : ViewDataBinding>(
     @LayoutRes

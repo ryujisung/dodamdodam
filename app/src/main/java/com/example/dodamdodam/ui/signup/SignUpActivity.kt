@@ -1,7 +1,6 @@
 package com.example.dodamdodam.ui.signup
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -14,7 +13,7 @@ import com.example.dodamdodam.R
 import com.example.dodamdodam.databinding.ActivitySignUpBinding
 import com.example.dodamdodam.ui.main.MainActivity
 import com.example.dodamdodam.ui.utils.State
-import com.example.lets_meet.ui.base.BaseActivity
+import com.example.dodamdodam.ui.base.BaseActivity
 import com.google.firebase.FirebaseApp
 
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up){
