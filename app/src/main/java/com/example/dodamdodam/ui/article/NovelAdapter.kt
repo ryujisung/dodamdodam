@@ -15,7 +15,7 @@ import com.example.dodamdodam.model.Novel
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
-class NovelAdapter(private val novelList: List<Novel>) : RecyclerView.Adapter<NovelAdapter.NovelViewHolder>() {
+class NovelAdapter(private val novels: List<Novel>, private val onItemClicked: (Novel) -> Unit) : RecyclerView.Adapter<NovelAdapter.NovelViewHolder>() {
 
     class NovelViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.item_novel, parent, false)) {
@@ -50,10 +50,11 @@ class NovelAdapter(private val novelList: List<Novel>) : RecyclerView.Adapter<No
     }
 
     override fun onBindViewHolder(holder: NovelViewHolder, position: Int) {
-        val novel: Novel = novelList[position]
+        val novel = novels[position]
+        holder.itemView.setOnClickListener { onItemClicked(novel) }
         holder.bind(novel, holder.itemView.context) // Pass the context from the itemView.
     }
 
 
-    override fun getItemCount(): Int = novelList.size
+    override fun getItemCount(): Int = novels.size
 }

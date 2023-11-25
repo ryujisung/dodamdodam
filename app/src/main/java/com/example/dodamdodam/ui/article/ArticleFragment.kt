@@ -1,6 +1,7 @@
 package com.example.dodamdodam.ui.article
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -39,7 +40,12 @@ class ArticleFragment : Fragment() {
                 val Poemlist = documents.toObjects(Poem::class.java)
                 Log.e("ddd",Poemlist.toString())
 
-                adapter = PoemAdapter(Poemlist)
+                adapter = PoemAdapter(Poemlist) { poem ->
+                    // Poem 아이템 클릭 시 PoemActivity로 이동
+                    val intent = Intent(context, PoemActivity::class.java)
+                    intent.putExtra("poemId", poem.title) // 예시, poem의 id를 전달
+                    startActivity(intent)
+                }
                 recyclerView.adapter = adapter
 
                 recyclerView2 = view.findViewById(R.id.novel_recycle)
@@ -58,7 +64,12 @@ class ArticleFragment : Fragment() {
                 recyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
-                adapter2 = NovelAdapter(Novellist)
+                adapter2 = NovelAdapter(Novellist) { novel ->
+                    // Novel 아이템 클릭 시 NovelActivity로 이동
+                    val intent = Intent(context, NovelActivity::class.java)
+                    intent.putExtra("novelId", novel.title) // 예시, novel의 id를 전달
+                    startActivity(intent)
+                }
                 recyclerView2.adapter = adapter2
             }
             .addOnFailureListener { exception ->

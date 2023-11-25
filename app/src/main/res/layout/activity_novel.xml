@@ -1,0 +1,48 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="novel"
+            type="com.example.dodamdodam.model.Novel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Title TextView -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{novel.title}"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp" />
+
+        <!-- Author TextView -->
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{novel.author}"
+            android:layout_below="@id/tvTitle"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp" />
+
+        <!-- Introduce TextView -->
+        <TextView
+            android:id="@+id/tvIntroduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{novel.introduce}"
+            android:layout_below="@id/tvAuthor"
+            android:layout_marginTop="12dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp" />
+
+        <!-- Other UI elements -->
+
+    </RelativeLayout>
+</layout>

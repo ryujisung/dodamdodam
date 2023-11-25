@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dodamdodam.R
 import com.example.dodamdodam.model.Poem
 
-class PoemAdapter(private val poems: List<Poem>) : RecyclerView.Adapter<PoemAdapter.PoemViewHolder>() {
+class PoemAdapter(private val poems: List<Poem>, private val onItemClicked: (Poem) -> Unit) : RecyclerView.Adapter<PoemAdapter.PoemViewHolder>() {
 
     class PoemViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.item_poem, parent, false)) {
@@ -31,7 +31,8 @@ class PoemAdapter(private val poems: List<Poem>) : RecyclerView.Adapter<PoemAdap
     }
 
     override fun onBindViewHolder(holder: PoemViewHolder, position: Int) {
-        val poem: Poem = poems[position]
+        val poem = poems[position]
+        holder.itemView.setOnClickListener { onItemClicked(poem) }
         holder.bind(poem)
     }
 
