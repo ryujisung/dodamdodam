@@ -112,7 +112,7 @@
             <View
                 app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/bar3"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:background="@color/sub4"

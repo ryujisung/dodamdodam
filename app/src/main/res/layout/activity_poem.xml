@@ -10,34 +10,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
-        <!-- Title TextView -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_arrow_back"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{poem.title}"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="8dp"/>
+            android:textSize="22sp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:layout_marginTop="30dp"/>
 
-        <!-- Author TextView -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{poem.author}"
-            android:textSize="18sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"/>
+            android:textSize="14sp"
+            android:textColor="@color/text3"
+            android:layout_marginTop="8dp"/>
 
-        <!-- Content TextView -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{poem.content}"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 </layout>
