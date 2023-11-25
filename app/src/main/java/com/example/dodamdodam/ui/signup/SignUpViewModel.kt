@@ -71,6 +71,21 @@ class SignUpViewModel: ViewModel() {
                             Log.e("dd",exception.toString())
                         }
 
+                    val data4 = hashMapOf(
+                        "exp" to 0,
+                    )
+                    db.collection("family")
+                        .document("detail")
+                        .collection(email.value.toString().dropLast(10))
+                        .document("exp")
+                        .set(data4)
+                        .addOnSuccessListener {
+                            Log.e("dd","success")
+                        }
+                        .addOnFailureListener { exception ->
+                            Log.e("dd",exception.toString())
+                        }
+
 
 
                 }else if(task.exception?.message.isNullOrEmpty()){

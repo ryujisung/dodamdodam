@@ -1,4 +1,5 @@
 package com.example.dodamdodam.ui.chat
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,90 +9,100 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dodamdodam.R
+import com.example.dodamdodam.databinding.FragmentChatBinding
+import com.example.dodamdodam.model.ChatRoom
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class ChatFragment : Fragment() {
 
-    private val client by lazy {
-        OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .build()
+    private lateinit var binding: FragmentChatBinding
+    private lateinit var chatRoomAdapter: ChatRoomAdapter
+    private lateinit var auth: FirebaseAuth
+
+    private val database = FirebaseDatabase.getInstance().reference
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentChatBinding.inflate(inflater, container, false)
+
+        binding.add.setOnClickListener {
+            createChatRoom("새대화")
+        }
+        setupRecyclerView()
+        fetchChatRooms()
+
+        return binding.root
+    }
+    private fun createChatRoom(name: String) {
+        val user = FirebaseAuth.getInstance().currentUser
+        val email = user?.email // 현재 로그인한 사용자의 이메일
+        val newRoomId = database.child("chatrooms").push().key
+        val calendar = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault())
+        val currentDate = dateFormat.format(calendar.time)
+
+        newRoomId?.let {
+            val users = mapOf( email?.dropLast(10).toString() to  true) // 샘플 사용자 목록, 실제 구현에서는 현재 사용자 정보를 사용해야 함
+            val chatRoom = ChatRoom(
+                roomId = it,
+                roomname = name,
+                users = users,
+                createdate = currentDate.toString()
+            )
+            database.child("chatrooms").child(it).setValue(chatRoom)
+        }
     }
 
-    private lateinit var editTextQuestion: EditText
-    private lateinit var textViewResponse: TextView
-    private lateinit var buttonSend: Button
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_chat, container, false)
-
-        editTextQuestion = view.findViewById(R.id.editTextQuestion)
-        textViewResponse = view.findViewById(R.id.textViewResponse)
-        buttonSend = view.findViewById(R.id.buttonSend)
-
-        buttonSend.setOnClickListener {
-            callAPI(editTextQuestion.text.toString())
+    private fun setupRecyclerView() {
+        chatRoomAdapter = ChatRoomAdapter { chatRoom ->
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra("chatRoomId", chatRoom.roomId)
+            startActivity(intent)
         }
-
-        return view
+        binding.recyclerChatrooms.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = chatRoomAdapter
+        }
     }
 
-    private fun callAPI(question: String) {
-        val arr = JSONArray().apply {
-            put(JSONObject().apply {
-                put("role", "user")
-                put("content", "You are a helpful and kind AI Assistant.")
-            })
-            put(JSONObject().apply {
-                put("role", "user")
-                put("content", question)
-            })
-        }
-
-        val requestBody = JSONObject().apply {
-            put("model", "gpt-3.5-turbo")
-            put("messages", arr)
-        }.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
-
-        val request = Request.Builder()
-            .url("https://api.openai.com/v1/chat/completions")
-            .header("Authorization", "Bearer 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")
-            .post(requestBody)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("ChatFragment", "API Request Failure", e)
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                if (response.isSuccessful) {
-                    val responseString = response.body?.string()
-                    Log.d("ChatFragment", "Response: $responseString")
-                    responseString?.let {
-                        try {
-                            val jsonObject = JSONObject(it)
-                            val jsonArray = jsonObject.getJSONArray("choices")
-                            val result = jsonArray.getJSONObject(0).getString("content")
-                            // 결과 처리 관련 코드 추가...
-                        } catch (e: Exception) {
-                            Log.e("ChatFragment", "JSON Parsing Error", e)
+    private fun fetchChatRooms() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val email = user?.email // 현재 로그인한 사용자의 이메일
+        database.child("chatrooms").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val chatRooms = mutableListOf<ChatRoom>()
+                for (snapshot in dataSnapshot.children) {
+                    val chatRoom = snapshot.getValue(ChatRoom::class.java)
+                    auth = FirebaseAuth.getInstance()
+                    if(chatRoom?.users?.containsKey(user?.email?.dropLast(10).toString()) == true) {
+                        chatRoom?.let {
+                            chatRooms.add(it)
                         }
                     }
-                } else {
-                    Log.e("ChatFragment", "API Request Unsuccessful: ${response.code}")
                 }
+                Log.d("ChatFragment", "Loaded chat rooms: ${chatRooms.size}") // 추가된 로그
+                chatRoomAdapter.setChatRooms(chatRooms)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // 채팅방 목록 불러오기 실패 처리
+                Log.e("ChatFragment", "Error loading chat rooms: ${databaseError.message}") // 오류 로그 추가
             }
         })
     }
 }
-
