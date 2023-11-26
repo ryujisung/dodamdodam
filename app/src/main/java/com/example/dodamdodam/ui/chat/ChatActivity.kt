@@ -17,6 +17,7 @@ import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -29,7 +30,6 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
     private lateinit var firebaseAuth: FirebaseAuth
     private val messagesList = mutableListOf<Message>()
     private lateinit var firestore: FirebaseFirestore
-
     private val client by lazy {
         OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
@@ -65,15 +65,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
                     sended_date = getCurrentDateTime()
                 )
                 sendMessage(chatRoomId, message)
-                callGPTAPI(messageText) { response ->
-                    val botMessage = Message(
-                        senderUid = "bot",
-                        content = response,
-                        senderName = "ChatBot",
-                        sended_date = getCurrentDateTime()
-                    )
-                    sendMessage(chatRoomId, botMessage)
-                }
+                callAPI(messageText)
                 binding.edittextChatMessage.text.clear()
             }
         }
@@ -117,48 +109,71 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
     }
 
     // GPT API 호출 함수
-    private fun callGPTAPI(question: String, onResult: (String) -> Unit) {
-        val arr = JSONArray().apply {
-            put(JSONObject().apply {
-                put("role", "user")
-                put("content", question)
-            })
+    fun callAPI(question: String) {
+        val arr = JSONArray()
+        val baseAi = JSONObject()
+        val userMsg = JSONObject()
+        try {
+            baseAi.put("role", "user")
+            baseAi.put("content", "You are a helpful and kind AI Assistant.")
+            userMsg.put("role", "user")
+            userMsg.put("content", question)
+            arr.put(baseAi)
+            arr.put(userMsg)
+        } catch (e: JSONException) {
+            throw RuntimeException(e)
         }
 
-        val requestBody = JSONObject().apply {
-            put("model", "gpt-3.5-turbo")
-            put("messages", arr)
-        }.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("model", "gpt-3.5-turbo")
+            jsonObject.put("messages", arr)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
 
+        val body = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
         val request = Request.Builder()
             .url("https://api.openai.com/v1/chat/completions")
-            .header("Authorization", "Bearer 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")
-            .post(requestBody)
+            .header("Authorization", "Bearer " +  "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")
+            .post(body)
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("ChatActivity", "API Request Failure", e)
+                addResponse("Failed to load response due to " + e.message)
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    if (it.isSuccessful) {
-                        val responseString = it.body?.string()
-                        Log.d("ChatActivity", "Response: $responseString")
-                        responseString?.let { responseBody ->
-                            val jsonObject = JSONObject(responseBody)
-                            val jsonArray = jsonObject.getJSONArray("choices")
-                            val result = jsonArray.getJSONObject(0).getString("content")
-                            runOnUiThread {
-                                onResult(result)
-                            }
-                        }
-                    } else {
-                        Log.e("ChatActivity", "API Request Unsuccessful: ${it.code}")
+                if (response.isSuccessful) {
+                    try {
+                        val responseBody = response.body?.string() ?: ""
+                        val jsonObject = JSONObject(responseBody)
+                        val jsonArray = jsonObject.getJSONArray("choices")
+                        val result = jsonArray.getJSONObject(0).getJSONObject("message").getString("content")
+                        addResponse(result.trim())
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
                     }
+                } else {
+                    addResponse("Failed to load response due to " + response.body?.string())
                 }
             }
+            private fun addResponse(response: String) {
+                val chatRoomId = intent.getStringExtra("chatRoomId") ?: return
+                runOnUiThread {
+                    // 여기서 response 문자열을 처리합니다.
+                    // 예를 들어, 채팅 메시지 목록에 추가하거나 화면에 표시할 수 있습니다.
+                    val botMessage = Message(
+                        senderUid = "bot",
+                        content = response,
+                        senderName = "ChatBot",
+                        sended_date = getCurrentDateTime()
+                    )
+                    sendMessage(chatRoomId, botMessage)
+                }
+            }
+
         })
     }
 }
