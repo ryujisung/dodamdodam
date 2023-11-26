@@ -11,6 +11,7 @@
         android:id="@+id/textView_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:fontFamily="@font/pretendard_semibold"
         android:textSize="18sp"
         android:text="한선린" />
     <TextView
@@ -19,6 +20,7 @@
         android:id="@+id/textView_answer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginTop="6dp"
         android:textSize="18sp"
         android:text="답" />
 
