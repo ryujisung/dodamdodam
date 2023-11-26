@@ -1,5 +1,7 @@
 package com.example.dodamdodam.ui.quetion
 
+import QuestionAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import com.example.dodamdodam.model.UserInfo
 import com.example.dodamdodam.ui.article.PoemAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -39,7 +42,12 @@ class QuetionFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        questionAdapter = QuestionAdapter()
+        questionAdapter = QuestionAdapter { question ->
+            val intent = Intent(activity, QuestionActivity::class.java).apply {
+                putExtra("question", question as Serializable)
+            }
+            startActivity(intent)
+        }
         recyclerView.adapter = questionAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         firestore = FirebaseFirestore.getInstance()
@@ -55,7 +63,7 @@ class QuetionFragment : Fragment() {
                     .get()
                     .addOnSuccessListener { documents ->
                         val question = documents.toObjects(Question::class.java)
-                        questionAdapter.setQuestions(question)
+                        questionAdapter.setQuestions(question.subList(0, daysUntilNow(date)+1).reversed())
 
                     }
                     .addOnFailureListener { exception ->

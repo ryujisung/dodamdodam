@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Dodamdodam"
         tools:targetApi="31">
         <activity
+            android:name=".ui.quetion.QuestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.more.edit.EditActivity"
             android:exported="false" />
         <activity

@@ -39,8 +39,7 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
                 val userInfo = documents.toObjects(UserInfo::class.java)
                 val familycode = userInfo[0].family
                 Log.e("ddd", email.toString())
-                firestore
-                        .collection("family")
+                firestore.collection("family")
                     .document("family")
                     .collection(familycode)
                     .get()
