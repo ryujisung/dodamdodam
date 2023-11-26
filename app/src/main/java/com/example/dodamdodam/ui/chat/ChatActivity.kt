@@ -138,7 +138,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
             .header("Authorization", "Bearer " +  "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")
             .post(body)
             .build()
-        val a = 0
+
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
