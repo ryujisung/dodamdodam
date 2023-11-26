@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <ImageView
         android:id="@+id/treeImageView"
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" /> <!-- Replace with your tree image resource -->
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/home_guideline1"/> <!-- Replace with your tree image resource -->
 
     <TextView
         android:id="@+id/specialArrivalTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/treeImageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/home_guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:text="오늘의 질문이 도착했어요!"
         android:textSize="18sp"
-        android:textAlignment="center" />
+        android:fontFamily="@font/pretendard_semibold"/>
 
-</RelativeLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/home_guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.83" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
