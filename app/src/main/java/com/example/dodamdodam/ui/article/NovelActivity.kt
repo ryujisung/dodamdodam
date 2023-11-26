@@ -28,7 +28,9 @@ class NovelActivity : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 if (documents.documents.isNotEmpty()) {
                     // 데이터 바인딩을 통해 화면에 표시
-                    val novel = documents.documents[0].toObject(Novel::class.java)
+                    var novel = documents.documents[0].toObject(Novel::class.java)
+                    novel?.introduce = novel?.introduce!!.replace("newline", "\n")
+
                     binding.novel = novel
                 } else {
                     // 적절한 처리 (데이터가 없을 경우)

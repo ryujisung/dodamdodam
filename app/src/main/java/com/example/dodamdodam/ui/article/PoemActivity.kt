@@ -28,6 +28,7 @@ class PoemActivity : AppCompatActivity() {
                 if (documents.documents.isNotEmpty()) {
                     // 데이터 바인딩을 통해 화면에 표시
                     val poem = documents.documents[0].toObject(Poem::class.java)
+                    poem?.content = poem?.content!!.replace("newline", "\n")
                     binding.poem = poem
                 } else {
                     // 적절한 처리 (데이터가 없을 경우)
