@@ -76,7 +76,7 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
             val intent = Intent(context, NotiActivity::class.java)
             startActivity(intent)
         }
-        binding.myTxtFammilys.setOnClickListener {
+        binding.myLayoutFamilly.setOnClickListener {
             val intent = Intent(context, ManageFamilyActivity::class.java)
             startActivity(intent)
         }
