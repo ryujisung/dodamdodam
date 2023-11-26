@@ -45,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/layout_chat_box"
+                android:clipToPadding="false"
                 android:layout_alignParentTop="true" />
 
             <FrameLayout
