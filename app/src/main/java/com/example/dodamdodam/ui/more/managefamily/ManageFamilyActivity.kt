@@ -1,12 +1,12 @@
-package com.example.dodamdodam.ui.more.pw
+package com.example.dodamdodam.ui.more.managefamily
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dodamdodam.R
 
-class PwActivity : AppCompatActivity() {
+class ManageFamilyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pw)
+        setContentView(R.layout.activity_manage_family)
     }
 }

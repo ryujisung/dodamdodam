@@ -45,6 +45,7 @@ class SignUpViewModel: ViewModel() {
                         "name" to nickname.value.toString(),
                         "family" to email.value?.dropLast(10).toString(),
                         "createdate" to  currentDate.toString(),
+                        "phone" to phoneNumber.value.toString(),
                     )
                     db.collection(email.value.toString())
                         .document("userinfo")

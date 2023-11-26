@@ -15,7 +15,6 @@ import com.example.dodamdodam.ui.login.LoginActivity
 import com.example.dodamdodam.ui.more.connetct.ConnectActivity
 import com.example.dodamdodam.ui.more.edit.EditActivity
 import com.example.dodamdodam.ui.more.noti.NotiActivity
-import com.example.dodamdodam.ui.more.pw.PwActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -61,10 +60,6 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
 
         binding.myTxtEdit.setOnClickListener {
             val intent = Intent(context, EditActivity::class.java)
-            startActivity(intent)
-        }
-        binding.myTxtPw.setOnClickListener {
-            val intent = Intent(context, PwActivity::class.java)
             startActivity(intent)
         }
         binding.myTxtConnect.setOnClickListener {

@@ -6,4 +6,5 @@ data class UserInfo(
     var family: String = "",
     var id: String = "",
     var createdate: String = "",
+    var phone : String = "",
 )
