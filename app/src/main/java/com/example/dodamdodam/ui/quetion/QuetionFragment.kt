@@ -63,7 +63,11 @@ class QuetionFragment : Fragment() {
                     .get()
                     .addOnSuccessListener { documents ->
                         val question = documents.toObjects(Question::class.java)
-                        questionAdapter.setQuestions(question.subList(0, daysUntilNow(date)+1).reversed())
+                        var day = daysUntilNow(date)
+                        if(day > question.size) {
+                            day = question.size
+                        }
+                        questionAdapter.setQuestions(question.subList(0,day ).reversed())
 
                     }
                     .addOnFailureListener { exception ->

@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="@={familycode}"
                 android:textSize="18sp"
-                android:id="@+id/familycode"/>
+                android:id="@+id/familycode1"/>
 
         </LinearLayout>
 

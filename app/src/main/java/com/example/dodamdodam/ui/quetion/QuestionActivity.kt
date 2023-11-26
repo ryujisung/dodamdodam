@@ -101,6 +101,11 @@ class QuestionActivity : BaseActivity<ActivityQuestionBinding>(R.layout.activity
 
                                     Log.e("dd", name)
                                     // userInfo[0].name과 일치하는 항목 제거
+                                    questionsList = questionsList.filter { it.question == question?.question }
+                                    additionalQuestions =
+                                        additionalQuestions.filter {it.question == question?.question }
+                                    Log.e("list", questionsList.toString())
+                                    Log.e("list", additionalQuestions.toString())
                                     var questionsList2 = questionsList.filter { it.name == name }
                                     var additionalQuestions2 =
                                         additionalQuestions.filter { it.name == name }
@@ -110,8 +115,14 @@ class QuestionActivity : BaseActivity<ActivityQuestionBinding>(R.layout.activity
                                         additionalQuestions.filter { it.name != name }
 
                                     Log.e("list", list.toString())
-                                    nametxt.text = list[0].name
-                                    answer.setText(list[0].answer)
+                                    if(list.isEmpty()){
+                                        nametxt.text = name
+                                        answer.setText("등록 안함")
+                                    }
+                                    else {
+                                        nametxt.text = name
+                                        answer.setText(list[0].answer)
+                                    }
                                     Log.e("dd", additionalQuestions.toString())
                                     // additionalQuestions을 questionsList에 추가
                                     questionsList = questionsList + additionalQuestions

@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dodamdodam.databinding.ItemFamilyManageBinding
+import com.example.dodamdodam.model.Family
 import com.example.dodamdodam.model.FamilyMember
 
-class FamilyMemberAdapter(private val members: List<FamilyMember>) : RecyclerView.Adapter<FamilyMemberAdapter.ViewHolder>() {
+class FamilyMemberAdapter(private val members: List<Family>) : RecyclerView.Adapter<FamilyMemberAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ItemFamilyManageBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(member: FamilyMember) {
+        fun bind(member: Family) {
             binding.textViewName.text = member.name
-            binding.textViewPhone.text = member.phoneNumber
+            binding.textViewPhone.text = member.email
         }
     }
 
