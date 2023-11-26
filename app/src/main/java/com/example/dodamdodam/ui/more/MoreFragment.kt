@@ -14,6 +14,7 @@ import com.example.dodamdodam.ui.base.BaseFragment
 import com.example.dodamdodam.ui.login.LoginActivity
 import com.example.dodamdodam.ui.more.connetct.ConnectActivity
 import com.example.dodamdodam.ui.more.edit.EditActivity
+import com.example.dodamdodam.ui.more.managefamily.ManageFamilyActivity
 import com.example.dodamdodam.ui.more.noti.NotiActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -75,7 +76,10 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
             val intent = Intent(context, NotiActivity::class.java)
             startActivity(intent)
         }
-
+        binding.myTxtFammilys.setOnClickListener {
+            val intent = Intent(context, ManageFamilyActivity::class.java)
+            startActivity(intent)
+        }
         return view
     }
 }
