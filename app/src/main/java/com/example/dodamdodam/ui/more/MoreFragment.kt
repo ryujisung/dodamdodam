@@ -1,6 +1,7 @@
 package com.example.dodamdodam.ui.more
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -78,6 +79,10 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
         }
         binding.myLayoutFamilly.setOnClickListener {
             val intent = Intent(context, ManageFamilyActivity::class.java)
+            startActivity(intent)
+        }
+        binding.myTxtCenter.setOnClickListener {
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://open.kakao.com/me/dodamamdoodam"))
             startActivity(intent)
         }
         return view
